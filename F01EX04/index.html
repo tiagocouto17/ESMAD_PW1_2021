@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F01EX04</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    
+    <div id="intro">
+        <p>Name: {{productName}}</p>
+        <p v-html='productDesc'></p>
+        <img v-bind:src="productImage" alt="" style="width: 20%;">
+        <p v-if='productPrice<1000'>Price: {{productPrice}}€</p>
+    
+        <button v-on:click='productPrice=1200'>REPOR</button>
+    </div>
+
+    <script src="./vueInstance.js"></script>
+</body>
+</html>
