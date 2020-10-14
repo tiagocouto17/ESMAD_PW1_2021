@@ -12,12 +12,14 @@
 
 
     <div id="intro">
-        <p>Name: {{productName}}</p>
+        <p>Name: {{productName}}</p>        
         <p v-html='productDesc'></p>
         <img v-bind:src="productImage" alt="" style="width: 20%;">
         <p v-if='productPrice < 1000'>Price: {{productPrice}}€</p>
-        <p v-if='productAvailability'>DISPONÍVEL</p>
+        
+        <p v-if='productAvailability'>DISPONÍVEL</p>        
         <p v-else>NÃO DISPONÍVEL</p>
+        
         <button v-on:click='productPrice=1200'>REPOR</button>
         <button v-bind:disabled='!productAvailability' v-on:click='productAvailability=false'>VENDER</button>
         
