@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F03EX01</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <p>{{person.firstName}} {{person.lastName}}</p>
+        <p>{{person.age}}</p>
+        <h1>METHOD</h1>
+        <p>{{dataPerson()}}</p>
+        <p>{{dataPerson()}}</p>
+        <h1>COMPUTED PROPERTY</h1>
+        <p>{{dataPersonComputed}}</p>
+        <p>{{dataPersonComputed}}</p>    
+        <p>Nome completo: {{fullNameComputed}}</p>        
+    </div>
+
+    <script src="./vueInstance.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F01EX01</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+
+    <div id="intro">
+
+        <!-- Modificar o texto do input e observar na consola -->
+        <input type="text" v-model="msg">
+
+
+        <p>Computed properties:</p>
+        {{computedProperty}}
+        <br>
+        {{computedProperty}}
+
+        <p>Method:</p>
+        {{method()}}
+        <br>
+        {{method()}}
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#intro',
+            data: {
+                msg: 'Hello Vue!'
+            },
+            computed: {
+                computedProperty() {
+                    console.log("Property");
+                    return this.msg;
+                }
+            },
+            methods: {
+                method() {
+                    console.log("Method");
+                    return this.msg;
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>
