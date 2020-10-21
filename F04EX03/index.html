@@ -15,18 +15,21 @@
             </li>
 
         </ul>  
-        <button v-on:click='addTeam("Braga",1923)'>ADICIONAR EQUIPA</button> 
-
+        <button v-on:click='addTeam("Braga",1923,"braga")'>ADICIONAR EQUIPA</button> 
+        <button v-on:click='filterLocation("lisboa")'>MOSTRAR EQUIPAS DE LISBOA</button> 
+       
         <table>
             <tr>
                 <th>#</th>
                 <th>NAME</th>
                 <th>YEAR</th>
+                <th>LOCATION</th>
             </tr>
-            <tr v-for='(team,index) in teams'>
+            <tr v-for='(team,index) in filteredTeams'>
                 <td>{{index+1}}</td>
                 <td>{{team.name}}</td>
                 <td>{{team.year}}</td>
+                <td>{{team.location}}</td>
             </tr>
         </table>
 
