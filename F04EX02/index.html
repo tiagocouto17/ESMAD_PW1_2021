@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F04EX02</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+    <div id="app">
+        <button v-on:click='addSchool("ESMAE")'>ADICIONAR</button>
+        <button v-on:click='filterSchool("E")'>FILTRAR</button>
+        
+        <h2>{{schools.length}} escolas do IPP</h2>
+        <p v-if='schools.length == 0'>SEM ESCOLAS</p>
+        <p v-else>
+            <ul>
+                <li v-for='school in filteredSchools'>
+                    {{school}}
+                </li>
+            </ul>
+        </p>
+    </div>
+    <script src="./vueInstance.js"></script>
+</body>
+</html>

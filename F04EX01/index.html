@@ -4,50 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F01EX01</title>
+    <title>F04EX01</title>
     <script src="https://unpkg.com/vue"></script>
 </head>
 
 <body>
-
-    <div id="intro">
-
-        <!-- Modificar o texto do input e observar na consola -->
-        <input type="text" v-model="msg">
-
-
-        <p>Computed properties:</p>
-        {{computedProperty}}
-        <br>
-        {{computedProperty}}
-
-        <p>Method:</p>
-        {{method()}}
-        <br>
-        {{method()}}
+    <div id="app">
+        <h1 v-bind:style='{
+            color: textColor, 
+            "font-size": fontSize + "px",
+            "background-color": backColor,
+            visibility: show}'>{{msg}}</h1>
+        <button v-on:click='changeColorText("red")'>RED</button>
+        <button v-on:click='changeFontSize(26)'>BIG</button>
+        <button v-on:click='changeBackColor("yellow")'>YELLOW</button>
+        <button v-on:click='changeVisibility()'>SHOW/HIDE</button>
+        
     </div>
-
-    <script>
-        const vm = new Vue({
-            el: '#intro',
-            data: {
-                msg: 'Hello Vue!'
-            },
-            computed: {
-                computedProperty() {
-                    console.log("Property");
-                    return this.msg;
-                }
-            },
-            methods: {
-                method() {
-                    console.log("Method");
-                    return this.msg;
-                }
-            }
-        })
-    </script>
-
+    <script src="./vueInstance.js"></script>
 </body>
 
 </html>

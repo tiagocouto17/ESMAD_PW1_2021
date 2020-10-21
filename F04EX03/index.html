@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F04EX03</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for='team in teams'>
+                Name: {{team.name}} AND year: {{team.year}}
+            </li>
+
+        </ul>  
+        <button v-on:click='addTeam("Braga",1923)'>ADICIONAR EQUIPA</button> 
+
+        <table>
+            <tr>
+                <th>#</th>
+                <th>NAME</th>
+                <th>YEAR</th>
+            </tr>
+            <tr v-for='(team,index) in teams'>
+                <td>{{index+1}}</td>
+                <td>{{team.name}}</td>
+                <td>{{team.year}}</td>
+            </tr>
+        </table>
+
+
+    </div>
+    <script src="./vueInstance.js"></script>
+</body>
+</head>
+<body>
+    
+</body>
+</html>
