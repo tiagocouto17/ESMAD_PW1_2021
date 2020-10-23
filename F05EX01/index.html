@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F05EX01</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <!--método sem parametros-->
+        <div>
+            <button v-on:click='showMsg'>METODO SEM PARAMETROS</button>
+        </div>
+        <!--método com parametros-->
+        <div>
+            <button v-on:click='showMsg2(msg)'>METODO COM PARAMETROS</button>
+        </div>
+        <!--nome do elemento que despoletou o evento-->
+        <div>
+            <button v-on:click='showMsg3'>NOME DO ELEMENTO</button>
+        </div>
+        <!--tipo do evento-->
+        <div>
+            <button v-on:click='showMsg4'>TIPO DO EVENTO</button>
+        </div>
+        <br><br>
+        <!--alinea D-->
+        <div v-on:click='showMessage'>
+            <button v-on:keyup.tab='showMessage'>CLICA-ME</button>
+        </div>
+    </div>
+
+
+    <script src="./vueInstance.js"></script>
+</body>
+
+</html>
