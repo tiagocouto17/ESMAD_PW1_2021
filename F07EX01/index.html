@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F07EX01</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1>myTravels</h1>
+        <form @submit.prevent='addTravel'>
+            <!--CONTINENT-->
+            <label for="sltContinent">CONTINENTE:</label>
+            <select id="sltContinent" v-model='frm.continent'>
+                <option value="europe">EUROPA</option>
+                <option value="africa">ÁFRICA</option>
+                <option value="asia">ÁSIA</option>
+                <option value="america">AMÉRICA</option>
+                <option value="oceania">OCEANIA</option>
+            </select><br>
+
+            <!--COUNTRY-->
+            <label for="txtCountry">PAÍS:</label>
+            <input type="text" id="txtCountry" v-model='frm.country'><br>
+
+            <!--CITIES-->
+            <label for="txtCities">CIDADES:</label>
+            <input type="text" id="txtCities" v-model='frm.cities'><br>
+            <small>liste as cidades separadas por vírgulas</small><br>
+
+            <!--DESCRIPTION-->
+            <label for="txtDescription">DESCRIÇÃO:</label><br>
+            <textarea id="txtDescription" cols="30" rows="10" v-model='frm.description'></textarea><br>
+
+            <!--START & END DATE-->
+            <label for="txtStartDate">DATA DE PARTIDA:</label><br>
+            <input type="date" id="txtStartDate" v-model='frm.startDate'><br>
+            <label for="txtEndDate">DATA DE CHEGADA:</label><br>
+            <input type="date" id="txtEndDate" v-model='frm.endDate'><br>
+
+            <!--TYPE-->
+            <input type="radio" id="rdHolidays" value='holidays' v-model='frm.type'>
+            <label for="rdHolidays">FÉRIAS</label>
+            <input type="radio" id="rdBusiness" value='business' v-model='frm.type'>
+            <label for="rdBusiness">NEGÓCIOS</label><br>
+
+            <!--LINK-->
+            <label for="txtPhoto">FOTO:</label>
+            <input type="url" id="txtPhoto" v-model='frm.photo'><br>
+
+            <br>
+            <input type="submit" value="ADICIONAR VIAGEM">
+        </form>
+        <br><br>
+
+        <!--LISTAGEM-->
+        <div id='listTravels'>
+            <div v-if='travels.length===0'>
+                SEM VIAGENS!
+            </div>
+            <div v-else>
+                <div id='filterTravels'>
+                    <!--CONTINENT-->
+                    <label for="sltFilterContinent">CONTINENTE:</label>
+                    <select id="sltFilterContinent" v-model='frm.filter.continent'>
+                        <option value="">TODOS</option>
+                        <option value="europe">EUROPA</option>
+                        <option value="africa">ÁFRICA</option>
+                        <option value="asia">ÁSIA</option>
+                        <option value="america">AMÉRICA</option>
+                        <option value="oceania">OCEANIA</option>
+                    </select><br>
+                    <!--START & END DATE-->
+                    <label for="txtStartDate">DATA DE PARTIDA:</label><br>
+                    <input type="date" id="txtStartDate" v-model='frm.filter.startDate'><br>
+                    <label for="txtEndDate">DATA DE CHEGADA:</label><br>
+                    <input type="date" id="txtEndDate" v-model='frm.filter.endDate'><br>
+
+
+                </div>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>CONTINENTE</th>
+                        <th>PAIS</th>
+                        <th>DATA PARTIDA</th>
+                        <th>DATA CHEGADA</th>
+                        <th>OPÇÕES</th>
+                    </tr>
+                    <tr v-for='travel in filteredTravels'>
+                        <td>{{travel.id}}</td>
+                        <td>{{travel.continent}}</td>
+                        <td>{{travel.country}}</td>
+                        <td>{{travel.startDate}}</td>
+                        <td>{{travel.endDate}}</td>
+                        <td>
+                            <button @click='editTravel(travel.id)'>EDITAR</button>
+                            <button @click='removeTravel(travel.id)'>REMOVER</button>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="./vueInstance.js"></script>
+</body>
+
+</html>
