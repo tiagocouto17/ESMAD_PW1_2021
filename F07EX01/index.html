@@ -11,7 +11,7 @@
 <body>
 
     <div id="app">
-        <h1>myTravels</h1>
+        <h1>MyTravels</h1>
         <form @submit.prevent='addTravel'>
             <!--CONTINENT-->
             <label for="sltContinent">CONTINENTE:</label>
@@ -29,8 +29,9 @@
 
             <!--CITIES-->
             <label for="txtCities">CIDADES:</label>
-            <input type="text" id="txtCities" v-model='frm.cities'><br>
-            <small>liste as cidades separadas por vírgulas</small><br>
+            <input type="text" size="50" id="txtCities" v-model='frm.cities'
+                placeholder="liste as cidades separadas por vírgulas"><br>
+            <br>
 
             <!--DESCRIPTION-->
             <label for="txtDescription">DESCRIÇÃO:</label><br>
@@ -54,16 +55,15 @@
 
             <br>
             <input type="submit" value="ADICIONAR VIAGEM">
-        </form>
-        <br><br>
 
-        <!--LISTAGEM-->
+        </form>
+        <br>
         <div id='listTravels'>
-            <div v-if='travels.length===0'>
+            <div v-if='travels.length === 0'>
                 SEM VIAGENS!
             </div>
             <div v-else>
-                <div id='filterTravels'>
+                <div id="filterTravels">
                     <!--CONTINENT-->
                     <label for="sltFilterContinent">CONTINENTE:</label>
                     <select id="sltFilterContinent" v-model='frm.filter.continent'>
@@ -79,8 +79,6 @@
                     <input type="date" id="txtStartDate" v-model='frm.filter.startDate'><br>
                     <label for="txtEndDate">DATA DE CHEGADA:</label><br>
                     <input type="date" id="txtEndDate" v-model='frm.filter.endDate'><br>
-
-
                 </div>
                 <table>
                     <tr>
@@ -95,8 +93,8 @@
                         <td>{{travel.id}}</td>
                         <td>{{travel.continent}}</td>
                         <td>{{travel.country}}</td>
-                        <td>{{travel.startDate}}</td>
-                        <td>{{travel.endDate}}</td>
+                        <td>{{formatDate(travel.startDate)}}</td>
+                        <td>{{formatDate(travel.endDate)}}</td>
                         <td>
                             <button @click='editTravel(travel.id)'>EDITAR</button>
                             <button @click='removeTravel(travel.id)'>REMOVER</button>
@@ -105,7 +103,24 @@
                     </tr>
                 </table>
             </div>
+            <div id="sortTravels">
+                <button @click="sortTravelByCountry">
+                    ORDENAR POR PAÍS 
+                    {{flagCountry == -1 ? "A-Z": "Z-A"}}                    
+                </button>
+                <button @click="sortTravelByStartDate">
+                    ORDENAR POR DATA DE PARTIDA                    
+                </button>
+            </div>
+
+
         </div>
+
+
+
+
+
+
 
     </div>
 
