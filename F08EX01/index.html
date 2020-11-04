@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F08EX01</title>
+    <script src="https://unpkg.com/vue"></script> 
+</head>
+<body>
+    <div id="app">
+        <h1>PortugalCastles</h1>
+        <form @submit.prevent='addCastle'>
+            <label for="txtName">NOME DO CASTELO: </label>
+            <input type="text" id="txtName" v-model='frm.name' required>
+            <br>
+            <label for="txtLink">FOTO DO CASTELO: </label>
+            <input type="url" id="txtLink" v-model='frm.link' required>
+            <br>
+            <input type="submit" value="ADICIONAR CASTELO">
+
+        </form>
+        <br>
+        <div id="listCastles">
+            <p v-if='castles.length==0'>
+                NÃO EXISTEM CASTELOS
+            </p>
+            <p v-else>
+                <div id="filterCastles">
+                    <label for="txtFilterName">NOME:</label>
+                    <input type="text" v-model='frm.filter.name' id="txtFilterName">
+                </div>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th @click='sortCastles'>NOME</th>
+                        <th>AÇÕES</th>
+                    </tr>
+                    <tr v-for='castle in filteredCastles'>
+                        <td>{{castle.id}}</td>
+                        <td>{{castle.name}}</td>
+                        <td>
+                            <button @click='editCastle(castle.id)'>EDITAR</button>
+                            <button @click='viewCastle(castle.id)'>VER</button>
+                            <button @click='removeCastle(castle.id)'>REMOVER</button>                            
+                        </td>
+                    </tr>
+                </table>
+            </p>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <dialog id='dlgUpdateCastle'>
+            <form @submit.prevent='updateCastle'>
+                <label for="txtName">ID DO CASTELO: </label>
+                <input type="text" id="txtName" v-model='frm.edit.id' readonly disabled>
+                <br>
+                <label for="txtName">NOME DO CASTELO: </label>
+                <input type="text" id="txtName" v-model='frm.edit.name' required>
+                <br>
+                <label for="txtLink">FOTO DO CASTELO: </label>
+                <input type="url" id="txtLink" v-model='frm.edit.link' required>
+                <br>
+                <input type="submit" value="ATUALIZAR CASTELO">
+    
+            </form>
+        </dialog>
+
+        <dialog id='dlgViewCastle'>
+            <img :src="link" alt="">
+            <br>
+            <form method="dialog">
+                <input type="submit" value="FECHAR">
+            </form>
+        </dialog>
+
+
+
+
+    </div>
+    <script src="./vueInstance.js"></script>
+</body>
+</html>
