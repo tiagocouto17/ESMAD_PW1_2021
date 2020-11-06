@@ -9,6 +9,20 @@
 <body>
     <div id="app">
         <h1>PortugalCastles</h1>
+        <div id="ef">
+            <button @click='manipulateArray("ei")'>ei</button>
+            <button @click='manipulateArray("eii")'>eii</button>
+            <button @click='manipulateArray("eiii")'>eiii</button>
+            <button @click='manipulateArray("eiv")'>eiv</button>
+            <button @click='manipulateArray("ev")'>ev</button>
+            <button @click='manipulateArray("evi")'>evi</button>
+            <button @click='manipulateArray("evii")'>evii</button>
+            <button @click='manipulateArray("eviii")'>eviii</button>
+            <button @click='manipulateArray("fi")'>fi</button>
+            <button @click='manipulateArray("fii")'>fii</button>
+            <button @click='manipulateArray("fiii")'>fiii</button>
+            <button @click='manipulateArray("fiv")'>fiv</button>
+        </div>
         <form @submit.prevent='addCastle'>
             <label for="txtName">NOME DO CASTELO: </label>
             <input type="text" id="txtName" v-model='frm.name' required>
