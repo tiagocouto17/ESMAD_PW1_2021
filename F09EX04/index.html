@@ -12,27 +12,131 @@
 
 <body>
     <div id="app">
-        
+        <h3>Filter</h3>
+        <!--POR EQUIPA-->
+        <label for="sltTeamNames">Por equipa</label>
+        <select id="sltTeamNames" v-model="filterTeamName">
+            <option value="">Todos</option>
+            <option v-for='teamName in getAllTeamNames' :value="teamName">{{teamName}}</option>
+        </select>
+
+        <!--POR ESTÁDIO-->
+        <label for="sltTeamStadiums">Por estádio</label>
+        <select id="sltTeamStadiums" v-model="filterStadiumName">
+            <option value="">Todos</option>
+            <option v-for='stadiumName in getAllStadiumNames' :value="stadiumName">{{stadiumName}}</option>
+        </select>
+
+        <div class="card-deck">
+            <game-soccer-card v-for="game in getFilteredGames" :game='game' :key='game.id'>
+            </game-soccer-card>
+        </div>
     </div>
+
     <script src="./vueComponent.js"></script>
     <script>
         // Instância Vue (componente pai)
         const vm = new Vue({
             el: '#app',
             data: {
-                games:[]
+                filterTeamName: '',
+                filterStadiumName: '',
+                games: []
+            },
+            computed: {
+                getFilteredGames() {
+                    return this.games.filter(
+                        game => {
+                            if (
+                                (
+                                    this.filterTeamName == "" || 
+                                    (this.filterTeamName == game.teamName1 || this.filterTeamName == game.teamName2)
+                                ) 
+                            && 
+                                (
+                                    this.filterStadiumName == "" || this.filterStadiumName == game.stadiumName
+                                )
+                            )
+                            return game;
+                    })
+                },
+
+                getAllTeamNames() {
+                    const teamsNames = [];
+                    for (let game of this.games) {
+                        if (teamsNames.indexOf(game.teamName1) == -1)
+                            teamsNames.push(game.teamName1);
+                        if (teamsNames.indexOf(game.teamName2) == -1)
+                            teamsNames.push(game.teamName2);
+                    }
+                    return teamsNames;
+                },
+
+                getAllStadiumNames() {
+                    const teamStadiums = [];
+                    for (let game of this.games) {
+                        if (teamStadiums.indexOf(game.stadiumName) == -1)
+                            teamStadiums.push(game.stadiumName);
+                    }
+                    return teamStadiums;
+                }
+
             },
             created() {
                 this.games.push(
                     {
-                        stadium: 'Estádio da Luz',
-                        photo: '',
-                        teamName1: 'Benfica',
-                        teamName2: 'Porto',
-                        goals: [
-                            {playerName:'Darwin', minutes:22, teamName:'Benfica'},
-                            {playerName:'Marega', minutes:92, teamName:'Porto'}
+                        id: 1,
+                        stadiumName: "Estádio da Luz",
+                        stadiumLink: "https://cdn.record.pt/images/2018-06/img_920x519$2018_06_26_20_17_25_1415170.jpg",
+                        teamName1: "SLBenfica",
+                        teamName2: "FCPorto",
+                        goals: [{
+                            playerName: "Jonas",
+                            playerTeam: "SLBenfica",
+                            goalMinute: 22
+                        },
+                        {
+                            playerName: "Pizzi",
+                            playerTeam: "SLBenfica",
+                            goalMinute: 90
+                        },
                         ]
+                    },
+                    {
+                        id: 2,
+                        stadiumName: "Estádio de Alvalade",
+                        stadiumLink: "https://thumbs.web.sapo.io/?epic=ZDFj45ME0wYwbQQ4VF/uvjyAZPcVzJcmElWJkQ/iVeyXgrbAkpMr9tH32N4qwN8P9e+dTYhj460RLl/PVk6eTgB05PP7JI3VgyFB2ROABv/KfRA=&W=800&H=0&delay_optim=1",
+                        teamName1: "SCSporting",
+                        teamName2: "SCEstoril",
+                        goals: [{
+                            playerName: "Bas Dost",
+                            playerTeam: "SCSporting",
+                            goalMinute: 93
+                        }]
+                    },
+                    {
+                        id: 3,
+                        stadiumName: "Estádio de Alvalade",
+                        stadiumLink: "https://thumbs.web.sapo.io/?epic=ZDFj45ME0wYwbQQ4VF/uvjyAZPcVzJcmElWJkQ/iVeyXgrbAkpMr9tH32N4qwN8P9e+dTYhj460RLl/PVk6eTgB05PP7JI3VgyFB2ROABv/KfRA=&W=800&H=0&delay_optim=1",
+                        teamName1: "SCSporting",
+                        teamName2: "SCEstoril",
+                        goals: [{
+                            playerName: "Bas Dost",
+                            playerTeam: "SCSporting",
+                            goalMinute: 93
+                        }]
+                    },
+                    {
+                        id: 4,
+                        stadiumName: "Estádio de Alvalade",
+                        stadiumLink: "https://thumbs.web.sapo.io/?epic=ZDFj45ME0wYwbQQ4VF/uvjyAZPcVzJcmElWJkQ/iVeyXgrbAkpMr9tH32N4qwN8P9e+dTYhj460RLl/PVk6eTgB05PP7JI3VgyFB2ROABv/KfRA=&W=800&H=0&delay_optim=1",
+                        teamName1: "SCSporting",
+                        teamName2: "SCEstoril",
+                        goals: [{
+                            playerName: "Bas Dost",
+                            playerTeam: "SCSporting",
+                            goalMinute: 93
+                        }]
                     }
                 )
             }
