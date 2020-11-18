@@ -116,11 +116,12 @@ const vm = new Vue({
         },
 
         getHighestGrade() {
-            if (this.grades.length!=0) {
+            // Solução sem usar o método sort
+            if (this.grades.length != 0) {
                 let highestGrade = this.grades[0].grade
                 let studentName = this.getStudentNameById(this.grades[0].student)
                 let disciplineName = this.getDisciplineNameById(this.grades[0].discipline)
-                
+
                 this.grades.forEach(
                     grade => {
                         if (grade.grade > highestGrade) {
@@ -133,7 +134,40 @@ const vm = new Vue({
             } else {
                 return `N/A`
             }
+        },
+        getBestStudentAverage() {
+            if (this.grades.length != 0) {
 
+                const studentsAverage = []
+                let average = 0, count = 0
+                this.students.forEach(
+                    student => {
+                        average = 0, count = 0
+                        average = this.grades.reduce(
+                            (acc, item) => {
+                                if (student.id == item.student) {
+                                    count++
+                                    return acc = acc + item.grade
+                                }
+                            }, 0) / count
+                        studentsAverage.push({ student: student.name, average: isNaN(average) ? 0 : average })
+
+                    }
+                )
+                let studentName = studentsAverage[0].student
+                let highestAverage = studentsAverage[0].average
+                studentsAverage.forEach(
+                    average => {
+                        if (average.average > highestAverage) {
+                            highestAverage = average.average
+                            studentName = average.student
+                        }
+                    }
+                )
+                return `A melhor média é do aluno ${studentName} com ${highestAverage}`
+            } else {
+                return 'N/A'
+            }
         }
     },
     created() {
