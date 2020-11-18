@@ -16,7 +16,7 @@
 
         <div id="lstStats">
             <ul>
-                <li>Nota mais alta do curso</li>
+                <li>Nota mais alta do curso: {{getHighestGrade}}</li>
                 <li>Nome do estudante com a melhor média</li>
                 <li>Nome da UC com a melhor média</li>
                 <li>Nome da UC com a mais alta taxa de reprovações</li>
@@ -104,8 +104,8 @@
         <!--MODAL DE EDIÇÃO-->
         <dialog id='dlgUpdateGrade'>
             <form @submit.prevent='updateGrade'>
-                <label for="txtGrade">NOVA NOTA: </label>
-                <input type="number" id="txtGrade" v-model='frm.edit.grade' required>
+                <label for="txtUpdateGrade">NOVA NOTA: </label>
+                <input type="number" id="txtUpdateGrade" v-model='frm.edit.grade' required>
                 <br>
                 <input type="submit" value="ATUALIZAR NOTA">
 

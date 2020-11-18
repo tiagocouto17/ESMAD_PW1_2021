@@ -1,21 +1,21 @@
 // Instância Vue (componente pai)
 const vm = new Vue({
     el: '#app',
-    data: { 
-        grade:'',
+    data: {
+        grade: '',
         sortFlag: -1,
         frm: {
-            student:'',
-            discipline:'',
-            grade:'',
-            edit : {
-                id:'',
-                grade:''
+            student: '',
+            discipline: '',
+            grade: '',
+            edit: {
+                id: '',
+                grade: ''
             },
             filter: {
-                student:'',
-                discipline:''
-             }
+                student: '',
+                discipline: ''
+            }
         },
         students: [],
         disciplines: [],
@@ -34,17 +34,17 @@ const vm = new Vue({
         addGrade() {
             const newGrade = {
                 id: this.getNextId(),
-                student: this.frm.student, 
+                student: this.frm.student,
                 discipline: this.frm.discipline,
-                grade: this.frm.grade
+                grade: +this.frm.grade
             }
-            if (!this.grades.some(grade => 
-                    grade.student == this.frm.student && 
-                    grade.discipline == this.frm.discipline)) {
+            if (!this.grades.some(grade =>
+                grade.student == this.frm.student &&
+                grade.discipline == this.frm.discipline)) {
                 this.grades.push(newGrade)
             } else {
                 alert('Nota já publicada para esse estudante e disciplina!')
-            }            
+            }
         },
         // Preparar a atualização de uma nota existente
         editGrade(id) {
@@ -63,7 +63,7 @@ const vm = new Vue({
             // Atualizar a nota
             this.grades.map(
                 grade => {
-                    if(grade.id === this.frm.edit.id) {
+                    if (grade.id === this.frm.edit.id) {
                         grade.grade = this.frm.edit.grade
                     }
                 }
@@ -92,28 +92,51 @@ const vm = new Vue({
             ).name
         },
         sortGrades() {
-            this.sortFlag = this.sortFlag * -1 
+            this.sortFlag = this.sortFlag * -1
             this.grades = this.grades.sort(this.compareGrades)
         },
 
         compareGrades(a, b) {
-            if(a.grade > b.grade) return 1 * this.sortFlag
-            if(a.grade < b.grade) return -1 * this.sortFlag
-            if(a.grade == b.grade) return 0
-        }
+            if (a.grade > b.grade) return 1 * this.sortFlag
+            if (a.grade < b.grade) return -1 * this.sortFlag
+            if (a.grade == b.grade) return 0
+        },
 
-     },
+
+
+    },
     computed: {
         getFilteredGrades() {
             return this.grades.filter(
-                grade => 
-                    (this.frm.filter.student==='' || grade.student === this.frm.filter.student)
+                grade =>
+                    (this.frm.filter.student === '' || grade.student === this.frm.filter.student)
                     &&
-                    (this.frm.filter.discipline==='' || grade.discipline === this.frm.filter.discipline)
+                    (this.frm.filter.discipline === '' || grade.discipline === this.frm.filter.discipline)
             )
+        },
+
+        getHighestGrade() {
+            if (this.grades.length!=0) {
+                let highestGrade = this.grades[0].grade
+                let studentName = this.getStudentNameById(this.grades[0].student)
+                let disciplineName = this.getDisciplineNameById(this.grades[0].discipline)
+                
+                this.grades.forEach(
+                    grade => {
+                        if (grade.grade > highestGrade) {
+                            highestGrade = grade.grade
+                            studentName = this.getStudentNameById(grade.student)
+                            disciplineName = this.getDisciplineNameById(grade.discipline)
+                        }
+                    });
+                return `A maior nota é do aluno ${studentName} com a nota ${highestGrade} a ${disciplineName}`
+            } else {
+                return `N/A`
+            }
+
         }
-     },
-    created() { 
+    },
+    created() {
         this.students.push(
             { id: 1, name: "João Silva" },
             { id: 2, name: "Maria Bastos" },
